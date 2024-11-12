@@ -3,22 +3,20 @@
         <!-- Page Content-->
         <div class="container px-4 px-lg-5">
             <!-- Heading Row-->
-            <div class="row gx-4 gx-lg-5 align-items-center my-5">
-                <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="https://dummyimage.com/900x400/dee2e6/6c757d.jpg" alt="..." /></div>
-                <div class="col-lg-5">
-                    <h1 class="font-weight-light"> 첫번째 상품</h1>
-                    <p>{{content.content|truncatewords:30}}</p>
-                    <a class="btn btn-primary" href="{% url 'detail' 1 %}"> 상품 상세보기</a>
+            {% if content_list %}
+                {% for content in content_list %}
+                <div class="row gx-4 gx-lg-5 align-items-center my-5">
+                    <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="https://dummyimage.com/900x400/dee2e6/6c757d.jpg" alt="..." /></div>
+                    <div class="col-lg-5">
+                        <h1 class="font-weight-light"> {{ content.title }} </h1>
+                        <p>{{content.content | truncatewords:30}}</p>
+                        <a class="btn btn-primary" href="{% url 'detail' content.id %}"> 상품 상세보기</a>
+                    </div>
                 </div>
-            </div>
-            <div class="row gx-4 gx-lg-5 align-items-center my-5">
-                <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="https://dummyimage.com/900x400/dee2e6/6c757d.jpg" alt="..." /></div>
-                <div class="col-lg-5">
-                    <h1 class="font-weight-light"> 두번째 상품</h1>
-                    <p>첫번째 상품으로 잘나가는 상품입니다.</p>
-                    <a class="btn btn-primary" href="{% url 'detail' 2 %}">상품 상세보기</a>
-                </div>
-            </div>
+                {% endfor %}
+            {% else %}
+                <p>content가 없습니다.</p>
+            {% endif %}
             <!-- Call to Action-->
             <div class="card text-white bg-secondary my-5 py-4 text-center">
                 <div class="card-body"><p class="text-white m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p></div>
